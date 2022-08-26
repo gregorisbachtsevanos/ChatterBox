@@ -1,3 +1,4 @@
+// import { Component } from 'react'; // for class
 import { useState, useEffect } from "react";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
@@ -8,9 +9,14 @@ const App = () => {
    const [searchField, setSearchField] = useState('')
    const [monsters, setMonsters] = useState([])
    const [filteredMonsters, setFilteredMonsters] = useState(monsters)
+   const [title, setTitle] = useState('')
 
    const onSearchChange = (e) => {
       setSearchField(e.target.value.toLocaleUpperCase());
+   }
+
+   const onTitleChange = (e) => {
+      setTitle(e.target.value.toLocaleUpperCase());
    }
 
    useEffect(() => {
@@ -28,15 +34,21 @@ const App = () => {
 
    return (
       <div className="App">
-         <h1 className="app-title">Monsters Rolodex</h1>
+         <h1 className="app-title">{title}</h1>
          <SearchBox
             placeholder="Search"
             className="monsters-search-box"
             onChangeHandler={onSearchChange}
          />
+         <SearchBox
+            placeholder="title"
+            className="title-search-box"
+            onChangeHandler={onTitleChange}
+         />
          <CardList monsters={filteredMonsters} />
       </div>
    )
+
 }
 
 // class App extends Component {
